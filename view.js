@@ -76,7 +76,7 @@ function halftoneQR(QRBytes, controlBytes, image) {
     // var pixels = data.data;
     finalCtx.putImageData(data, padding, padding);
 
-    $('#download').attr('href', $('#output').get(0).toDataURL());
+    $('#download').attr('href', $('#output_padding').get(0).toDataURL());
     
 }
 
