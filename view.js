@@ -2,6 +2,7 @@ var pixelSize = 2;
 var blockSize = (3*pixelSize);
 var image;
 var has_image = false;
+var padding = 7;
 
 function halftoneQR(QRBytes, controlBytes, image) {
     
@@ -64,7 +65,17 @@ function halftoneQR(QRBytes, controlBytes, image) {
             }
         };
     };
-    
+
+    var finalOutputCanvas = $('#output_padding').get(0);
+    finalOutputCanvas.width = canvas.width + padding * 2;
+    finalOutputCanvas.height = canvas.height + padding * 2;
+    var finalCtx = finalOutputCanvas.getContext('2d');
+    finalCtx.fillStyle = 'white';
+    finalCtx.fillRect(0, 0, finalOutputCanvas.width, finalOutputCanvas.height);
+    var data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    // var pixels = data.data;
+    finalCtx.putImageData(data, padding, padding);
+
     $('#download').attr('href', $('#output').get(0).toDataURL());
     
 }

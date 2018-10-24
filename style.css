@@ -41,6 +41,7 @@ canvas {
 
 #output {
     background-color: grey;
+    display: none;
 }
 
 #content {
