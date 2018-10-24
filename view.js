@@ -143,7 +143,12 @@ function drawThreshold() {
     ctxThreshold.putImageData(pixels, 0, 0);
 }
 
+$('body').on('dragstart', function(e) {
+    console.log('dragstart');
+})
+
 $('body').on('dragover', function(e) {
+    console.log('aga');
     e.preventDefault();
     $('body').addClass('hover');
 });
@@ -151,12 +156,9 @@ $('#overlay').on('dragend dragleave', function(e) {
     e.preventDefault();
     $('body').removeClass('hover');
 });
-$('#overlay').on('drop', function(e) {
-    e.preventDefault();
-    $('body').removeClass('hover');
-    
-    var file = e.originalEvent.dataTransfer.files[0],
-        reader = new FileReader();
+
+function processFile(file) {
+    var reader = new FileReader();
     reader.onload = function(event) {
         //event.target.result;
         var imageColour = new Image();
@@ -168,9 +170,22 @@ $('#overlay').on('drop', function(e) {
         imageColour.src = event.target.result;
     };
     reader.readAsDataURL(file);
+
+}
+
+$('#overlay').on('drop', function(e) {
+    e.preventDefault();
+    $('body').removeClass('hover');
     
+    var file = e.originalEvent.dataTransfer.files[0];
+    processFile(file)
+
     return false;
 });
+
+$('#file_picker').on('change', function(e) {
+    processFile(this.files[0]);
+})
 
 $(function() {
     
