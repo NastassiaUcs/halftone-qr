@@ -42,3 +42,7 @@ canvas {
 #output {
     background-color: grey;
 }
+
+#content {
+    margin: 30px;
+}
